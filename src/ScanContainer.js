@@ -30,10 +30,14 @@ class ScanContainer extends React.Component {
         this.sortScans();
     }
 
-    closeNewScan = (event) => {
+    closeNewScan = () => {
         this.setState({
           addNew: 'hidden',
           addBtn: 'Add New Scan',
+          newName: '',
+          newUser: 0,
+          newMinEle: 0,
+          newMaxEle: 0,
         })
     }
 
@@ -57,7 +61,13 @@ class ScanContainer extends React.Component {
         
         let newScans = this.state.scans
         newScans.push(newScan)
-        this.setState({scans: newScans}, () => {
+        this.setState({
+            scans: newScans,
+            newName: '',
+            newUser: 0,
+            newMinEle: 0,
+            newMaxEle: 0,
+        }, () => {
             this.sortScans();
             this.closeNewScan();
         })
@@ -111,7 +121,11 @@ class ScanContainer extends React.Component {
             scannedByUserId: parseInt(this.state.editUser, 10),
         }
         
-        this.setState({scans: editedScans}, () => {
+        this.setState({
+            scans: editedScans,
+            newName: '',
+            newUser: 0,
+        }, () => {
             this.sortScans();
             this.closeNewScan();
         })
@@ -127,13 +141,13 @@ class ScanContainer extends React.Component {
     sortScans = () => {
         switch (this.state.sort) {
             case 'name':
-                this.setState({scans: this.state.scans.sort(sortByName)});
+                this.setState({edit: -1, scans: this.state.scans.sort(sortByName)});
                 break;
             case 'user':
-                this.setState({scans: this.state.scans.sort(sortByUser)});
+                this.setState({edit: -1, scans: this.state.scans.sort(sortByUser)});
                 break;
             case 'elevation':
-                this.setState({scans: this.state.scans.sort(sortByElevation)});
+                this.setState({edit: -1, scans: this.state.scans.sort(sortByElevation)});
                 break;
             default:
                 break;
@@ -156,22 +170,20 @@ class ScanContainer extends React.Component {
                     handleUserChange={this.handleEditUserChange}
                 />
                 <button onClick={this.openNewScan}>{this.state.addBtn}</button>
-                    <div className={`${this.state.addNew}`}> 
-                    <NewScan 
-                        users={this.state.users}
-                        newName={this.state.newName}
-                        handleNameChange={this.handleNewNameChange}
-                        newUser={this.state.newUser}
-                        handleUserChange={this.handleNewUserChange}
-                        newMinEle={this.state.newMinEle}
-                        handleMinEleChange={this.handleNewMinEleChange}
-                        newMaxEle={this.state.newMaxEle} 
-                        handleMaxEleChange={this.handleNewMaxEleChange}
-                        addNewScan={this.addNewScan}
-                        />
-                    </div>
-             
-                
+                <div className={`${this.state.addNew}`}> 
+                <NewScan 
+                    users={this.state.users}
+                    newName={this.state.newName}
+                    handleNameChange={this.handleNewNameChange}
+                    newUser={this.state.newUser}
+                    handleUserChange={this.handleNewUserChange}
+                    newMinEle={this.state.newMinEle}
+                    handleMinEleChange={this.handleNewMinEleChange}
+                    newMaxEle={this.state.newMaxEle} 
+                    handleMaxEleChange={this.handleNewMaxEleChange}
+                    addNewScan={this.addNewScan}
+                    />
+                </div>
             </div>
         );
     }
