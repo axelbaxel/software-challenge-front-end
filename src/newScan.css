@@ -1,0 +1,4 @@
+.newScan {
+    display: flex;
+    flex-direction: column;
+}

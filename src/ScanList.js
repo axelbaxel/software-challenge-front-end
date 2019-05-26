@@ -1,59 +1,53 @@
 import React from 'react';
 import './ScanList.css'
-import {sortByName, sortByUser, sortByElevation} from './util'
 import DropDown from './simpleDropdown';
 
 
-class ScanList extends React.Component {
+class ScanList extends React.Component {  
 
-    constructor(props) {
-        super();
-        this.state = {
-            sort: sortByName,
-        }
-    }
 
-    changeSort = (event) => {
-        switch (event.target.value) {
-            case 'name':
-                this.setState({sort: sortByName});
-                break;
-            case 'user':
-                this.setState({sort: sortByUser});
-                break;
-            case 'elevation':
-                this.setState({sort: sortByElevation});
-                break;
-            default:
-                break;
-        }
-    }
-
-    
 
     render() {
-        console.log(this.props.scans.sort(this.state.sort));
-        console.log(this.state.sort);
+        
         return (
-            <div>
-                
+            <div>                
                 <div className="Header">
                     Scans:
                 </div>
-                Sort by: <DropDown onChange={this.changeSort} />
+                Sort by: <DropDown onChange={this.props.changeSort} />
                 <div className="ScanList">
-                    {this.props.scans.sort(this.state.sort)
-                    .map((scan, i) => {
+                    {this.props.scans.map((scan, i) => {
                         const user = this.props.users.find(u => u.id === scan.scannedByUserId);
                         return (
+                        <div key={i}>
+
                             <div
                                 className="ScanListItem"
-                                key={i}
                             >
-                                {scan.name}
+                                <div className="ScanListItemInfo">{scan.name}
                                 <div className="UserName">
                                     by {user.name}
-                                </div>
+                                </div></div>
+                                <div className="ScanListItemEdit"><button onClick={(e) => this.props.editScan(i, e)}>Edit Scan</button></div>
+                            </div>
+                            <div className={`${this.props.edit === i ? 'visible' : 'hidden'}`}> 
+                                <form onSubmit={this.props.submitEditScan} className='editScan'>
+                                    <div id="editName">
+                                    Scan Name:
+                                    <input placeholder="Item name" type='text' value={this.props.editName} onChange={this.props.handleNameChange}></input></div>
+                                    
+                                    <div id="editUser">
+                                    Scanning User:
+                                    <select value={this.props.editUser} onChange={this.props.handleUserChange}>
+                                    {this.props.users.map(user => (
+                                        <option key={user.id} value={user.id}>{user.name}</option>
+                                    ))}   
+                                    </select>
+                                    </div>
+                                    <input type='submit' value="Submit edit"></input>
+                                </form>
+                            </div>
+                                
                             </div>
                         );
                     })}

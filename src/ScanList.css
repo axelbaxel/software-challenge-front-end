@@ -13,9 +13,23 @@
 
 .ScanListItem {
     padding: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
 .UserName {
     padding: 10px;
     font-size: calc(10px + 0.5vmin);
+}
+
+.ScanListItemInfo {
+    flex-grow: 2;
+}
+.visible {
+    visibility: visible;
+    display: initial;
+}
+.hidden {
+    visibility: hidden;
+    display:none;
 }

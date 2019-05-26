@@ -15,4 +15,10 @@ select {
 .popup {
   color:black;
 }
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
 
