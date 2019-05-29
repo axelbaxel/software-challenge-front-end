@@ -33,12 +33,12 @@ const ScanList = (props) => {
                             <form onSubmit={props.submitEditScan} className='editScan'>
                                 <div id="editName">
                                     Scan Name:
-                                    <input placeholder="Item name" type='text' value={props.editName} onChange={props.handleNameChange}></input>
+                                    <input name='editName' placeholder="Item name" type='text' value={props.editName} onChange={props.handleInputChange}></input>
                                 </div>
                                 
                                 <div id="editUser">
                                     Scanning User:
-                                    <select value={props.editUser} onChange={props.handleUserChange}>
+                                    <select name='editUser' value={props.editUser} onChange={props.handleInputChange}>
                                         {props.users.map(user => (
                                             <option key={user.id} value={user.id}>{user.name}</option>
                                         ))}   

@@ -141,23 +141,11 @@ class ScanContainer extends React.Component {
     }
 
 
-    handleNewNameChange = (e) => {
-        this.setState({newName: e.target.value})
-    }
-    handleNewUserChange = (e) => {
-        this.setState({newUser: e.target.value})
-    }
-    handleNewMinEleChange = (e) => {
-        this.setState({newMinEle: e.target.value})
-    }
-    handleNewMaxEleChange = (e) => {
-        this.setState({newMaxEle: e.target.value})
-    }
-    handleEditNameChange = (e) => {
-        this.setState({editName: e.target.value})
-    }
-    handleEditUserChange = (e) => {
-        this.setState({editUser: e.target.value})
+    handleInputChange = (e) => {
+        const target = e.target;
+        const val = target.value;
+        const name = target.name;
+        this.setState({[name]: val})
     }
 
     render() {
@@ -172,21 +160,17 @@ class ScanContainer extends React.Component {
                     editName={this.state.editName}
                     editUser={this.state.editUser}
                     submitEditScan={this.submitEdit}
-                    handleNameChange={this.handleEditNameChange}
-                    handleUserChange={this.handleEditUserChange}
+                    handleInputChange={this.handleInputChange}
                 />
                 <button onClick={this.openNewScan}>{this.state.addBtn}</button>
                 <div className={`${this.state.addNew}`}> 
                 <NewScan 
                     users={this.state.users}
                     newName={this.state.newName}
-                    handleNameChange={this.handleNewNameChange}
+                    handleInputChange={this.handleInputChange}
                     newUser={this.state.newUser}
-                    handleUserChange={this.handleNewUserChange}
                     newMinEle={this.state.newMinEle}
-                    handleMinEleChange={this.handleNewMinEleChange}
                     newMaxEle={this.state.newMaxEle} 
-                    handleMaxEleChange={this.handleNewMaxEleChange}
                     addNewScan={this.addNewScan}
                     />
                 </div>
