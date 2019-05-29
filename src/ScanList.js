@@ -1,6 +1,5 @@
 import React from 'react';
 import './ScanList.css'
-import DropDown from './simpleDropdown';
 
 
 const ScanList = (props) => {  
@@ -10,20 +9,26 @@ const ScanList = (props) => {
             <div className="Header">
                 Scans:
             </div>
-            Sort by: <DropDown onChange={props.changeSort} />
+            Sort by: 
+            <select onChange={props.changeSort}>
+               <option value='name' key='dd_name'> Name</option>
+               <option value='user' key='dd_user'> Username</option>
+               <option value='elevation' key='dd_elevation'> Elevation</option>   
+            </select>
             <div className="ScanList">
                 {props.scans.map((scan, i) => {
                     const user = props.users.find(u => u.id === scan.scannedByUserId);
                     return (
-                    <div key={i}>
+                    <div key={i} className="ScanListItemContainer">
                         <div className="ScanListItem">
                             <div className="ScanListItemInfo">{scan.name}
                                 <div className="UserName">
                                     by {user.name}
                                 </div>
                             </div>
-                            <div className="ScanListItemEdit"><button onClick={(e) => props.editScan(i, e)}>Edit Scan</button></div>
+                            <div ><button className="ScanListItemEditBtn"onClick={(e) => props.editScan(i, e)}>Edit Scan</button></div>
                         </div>
+                        {/* EditScan kunne vel også vært lagt inn som egen komponent som NewScan,  men er ikke like stor så tenker at den er litt i grenseland*/}
                         <div className={`${props.edit === i ? 'visible' : 'hidden'}`}> 
                             <form onSubmit={props.submitEditScan} className='editScan'>
                                 <div id="editName">

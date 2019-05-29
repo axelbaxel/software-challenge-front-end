@@ -26,10 +26,12 @@ class ScanContainer extends React.Component {
         editUser:0,
     };
 
+    //Sorterer etter navn fra starten av, for å unngå en usortert liste fra starten av
     componentDidMount = () => {
         this.sortScans();
     }
 
+    //gjemmer komponenten for å legge til ny scan og nullstiller
     closeNewScan = () => {
         this.setState({
           addNew: 'hidden',
@@ -41,6 +43,7 @@ class ScanContainer extends React.Component {
         })
     }
 
+    //viser komponenten for å legge til ny scan
     openNewScan = () => {
         let visibility = this.state.addNew === 'hidden' ? 'visible' : 'hidden';
         let btnText = this.state.addNew === 'hidden' ? 'Hide' : 'Add New Scan';
@@ -51,6 +54,7 @@ class ScanContainer extends React.Component {
         this.forceUpdate();
     }
 
+    //legger til ny scan i scans arrayet, så sorteres det og til slutt lukkes komponenten.
     addNewScan = (e) => {
         let newScan = {
             name: this.state.newName,
@@ -74,21 +78,7 @@ class ScanContainer extends React.Component {
         e.preventDefault();
     }
 
-    handleNewNameChange = (e) => {
-        this.setState({newName: e.target.value})
-    }
-    handleNewUserChange = (e) => {
-        this.setState({newUser: e.target.value})
-    }
-    handleNewMinEleChange = (e) => {
-        this.setState({newMinEle: e.target.value})
-    }
-    handleNewMaxEleChange = (e) => {
-        this.setState({newMaxEle: e.target.value})
-    }
-
-
-
+    //Åpner redigerings boksen og fyller inn eksisterende informasjon som skal kunne redigeres
     editScan = (id) => {
         if (id === this.state.edit) {
             this.setState({
@@ -104,15 +94,8 @@ class ScanContainer extends React.Component {
         
     }
 
-    handleEditNameChange = (e) => {
-        this.setState({editName: e.target.value})
-    }
-    handleEditUserChange = (e) => {
-        this.setState({editUser: e.target.value})
-    }
-
+    //oppdaterer elementet i arrayen som skal endres
     submitEdit = (e) => {
-
         let editedScans = this.state.scans;
         editedScans[this.state.edit] = {
             name: this.state.editName,
@@ -132,12 +115,15 @@ class ScanContainer extends React.Component {
         e.preventDefault();
     }
 
+    //endrer sorteringstypen
     changeSort = (event) => {
         this.setState({sort: event.target.value}, () => {
             
             this.sortScans()
         })
     }
+
+    //sorterer array
     sortScans = () => {
         switch (this.state.sort) {
             case 'name':
@@ -152,6 +138,26 @@ class ScanContainer extends React.Component {
             default:
                 break;
         }
+    }
+
+
+    handleNewNameChange = (e) => {
+        this.setState({newName: e.target.value})
+    }
+    handleNewUserChange = (e) => {
+        this.setState({newUser: e.target.value})
+    }
+    handleNewMinEleChange = (e) => {
+        this.setState({newMinEle: e.target.value})
+    }
+    handleNewMaxEleChange = (e) => {
+        this.setState({newMaxEle: e.target.value})
+    }
+    handleEditNameChange = (e) => {
+        this.setState({editName: e.target.value})
+    }
+    handleEditUserChange = (e) => {
+        this.setState({editUser: e.target.value})
     }
 
     render() {

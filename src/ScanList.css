@@ -11,6 +11,11 @@
     border-style: solid;
 }
 
+.ScanListItemContainer {
+
+    border: 1px dotted white;
+}
+
 .ScanListItem {
     padding: 10px;
     display: flex;
@@ -20,6 +25,13 @@
 .UserName {
     padding: 10px;
     font-size: calc(10px + 0.5vmin);
+}
+
+.ScanListItemEditBtn {
+    background-color: darkblue;
+    background: 0%;
+    border-radius: 3px;
+    color: white;
 }
 
 .ScanListItemInfo {
