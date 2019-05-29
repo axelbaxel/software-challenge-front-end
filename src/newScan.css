@@ -1,4 +1,15 @@
 .newScan {
+    width:25%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    font-size: calc(10px + 0.7vmin);
+}
+.inputPart {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2px;
+    margin-bottom: 5px;
 }

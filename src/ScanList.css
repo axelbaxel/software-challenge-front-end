@@ -13,7 +13,12 @@
 
 .ScanListItemContainer {
 
-    border: 1px dotted white;
+    border: 1px solid rgba(255, 255, 255, 0.068);
+}
+
+.ScanListItemContainer:hover {
+
+    background-color: #3f4550;
 }
 
 .ScanListItem {
@@ -28,10 +33,13 @@
 }
 
 .ScanListItemEditBtn {
-    background-color: darkblue;
-    background: 0%;
+    background-color: rgb(5, 139, 0);
     border-radius: 3px;
     color: white;
+}
+.ScanListItemEditBtn:hover {
+    background-color: rgb(61, 175, 57);
+    
 }
 
 .ScanListItemInfo {
